@@ -10,6 +10,10 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <title>search Planets</title>
+    
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery-1.10.2.js"></script>
+	<!-- <script src="js/jquery-ui.custom.min.js"></script> -->
   </head>
 
   <body>
@@ -29,5 +33,19 @@
     	<tr><button type="button" id="searchButton">Search</button></tr>
     </table>
     
+    <script type="text/javascript">
+    $(document).on("click","#searchButton",function(event){
+    	event.preventDefault();
+    	//alert("begining");
+    	$.post('http://data.nasa.gov/api/get_search_results/?','search=saturn',function(status){
+    		alert("here");
+    		$.mobile.hidePageLoadingMsg();
+			/* if(response.error){
+				alert(response.error);
+			} */
+    	});
+    	alert("Button clicked");
+    });
+    </script>
   </body>
 </html>
