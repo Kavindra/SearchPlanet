@@ -2,18 +2,13 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.7.0_25">
-		<attributes>
-			<attribute name="owner.project.facets" value="java"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="D:/httpcomponents-core-4.2.4-bin/httpcomponents-core-4.2.4/lib/httpcore-4.2.4.jar"/>
-	<classpathentry exported="true" kind="lib" path="D:/httpcomponents-client-4.2.5-bin/httpcomponents-client-4.2.5/lib/httpclient-4.2.5.jar"/>
-	<classpathentry exported="true" kind="lib" path="D:/httpcomponents-client-4.2.5-bin/httpcomponents-client-4.2.5/lib/commons-logging-1.1.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="D:/httpcomponents-client-4.2.5-bin/httpcomponents-client-4.2.5/lib/commons-codec-1.6.jar"/>
-	<classpathentry exported="true" kind="lib" path="D:/httpcomponents-client-4.2.5-bin/httpcomponents-client-4.2.5/lib/fluent-hc-4.2.5.jar"/>
-	<classpathentry exported="true" kind="lib" path="D:/httpcomponents-client-4.2.5-bin/httpcomponents-client-4.2.5/lib/httpclient-cache-4.2.5.jar"/>
-	<classpathentry exported="true" kind="lib" path="D:/httpcomponents-client-4.2.5-bin/httpcomponents-client-4.2.5/lib/httpmime-4.2.5.jar"/>
-	<classpathentry exported="true" kind="lib" path="D:/google-gson-2.2.4-release/google-gson-2.2.4/gson-2.2.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Su/Desktop/httpclient/httpcomponents-client-4.2.5/lib/commons-codec-1.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Su/Desktop/httpclient/httpcomponents-client-4.2.5/lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Su/Desktop/httpclient/httpcomponents-client-4.2.5/lib/fluent-hc-4.2.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Su/Desktop/httpclient/httpcomponents-client-4.2.5/lib/httpclient-4.2.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Su/Desktop/httpclient/httpcomponents-client-4.2.5/lib/httpclient-cache-4.2.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Su/Desktop/httpclient/httpcomponents-client-4.2.5/lib/httpcore-4.2.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Su/Desktop/httpclient/httpcomponents-client-4.2.5/lib/httpmime-4.2.5.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
