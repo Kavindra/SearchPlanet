@@ -13,12 +13,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-
 import com.google.gson.Gson;
+
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 
 /**
  * Servlet implementation class SearchPlanetController
@@ -47,24 +46,32 @@ public class SearchPlanetController extends HttpServlet {
 		
 		
 		String planetName = request.getParameter("planet");
-		DefaultHttpClient   httpclient = new DefaultHttpClient();
-		HttpPost httppost = new HttpPost("http://data.nasa.gov/api/get_search_results/?search=" + planetName);
+		//DefaultHttpClient   httpclient = new DefaultHttpClient();
+		//HttpPost httppost = new HttpPost("http://data.nasa.gov/api/get_search_results/?search=" + planetName);
 		// Depends on your web service
-		httppost.setHeader("Content-type", "application/json");
+		//httppost.setHeader("Content-type", "application/json");
 
-		InputStream inputStream = null;
+		//InputStream inputStream = null;
 		String result = null;
+		String error = "test";
 		List<String> excerpts = new ArrayList<String>();
 		
 		try {
-			HttpResponse jsonresponse = httpclient.execute(httppost);           
-		    HttpEntity entity = jsonresponse.getEntity();
+			//HttpResponse jsonresponse = httpclient.execute(httppost);           
+		   // HttpEntity entity = jsonresponse.getEntity();
 
-		    inputStream = entity.getContent();
+		   // inputStream = entity.getContent();
 		    // json is UTF-8 by default
-		    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"), 8);
+		  //  BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"), 8);
 		    StringBuilder sb = new StringBuilder();
 
+			URL url = new URL("http://data.nasa.gov/api/get_search_results/?search=" + planetName);
+			HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+			conn.setConnectTimeout(120000);  //60 Seconds
+			conn.setReadTimeout(120000);  //60 Seconds
+	        conn.setInstanceFollowRedirects(true);
+			BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
+			
 		    String line = null;
 		    while ((line = reader.readLine()) != null)
 		    {
@@ -88,13 +95,15 @@ public class SearchPlanetController extends HttpServlet {
 		} catch (Exception e) { 
 		    // Oops
 			System.out.println("Error: " + e);
+			error = e.toString();
+			
 		}
 		finally {
-		    try{if(inputStream != null)inputStream.close();}catch(Exception squish){}
+		    //try{if(inputStream != null)inputStream.close();}catch(Exception squish){}
 		}
 		
-		request.setAttribute("jsonstring", result);
-		request.setAttribute("excerpts", excerpts);
+		//request.setAttribute("jsonstring", result);
+		request.setAttribute("excerpts", error);
 		RequestDispatcher view = request.getRequestDispatcher("PlanetDetails.jsp");
 		view.forward(request,response);	
 	}
