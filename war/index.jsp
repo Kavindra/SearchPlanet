@@ -69,6 +69,37 @@ pageEncoding="ISO-8859-1"%>
     	$("#search-results").append('<div>Searching....</div>');
     	var result = '';
     	
+    	var currentdate = new Date(); 
+    	var datetime = currentdate.getDate() + "/"
+    	                + (currentdate.getMonth()+1)  + "/" 
+    	                + currentdate.getFullYear() + " @ "  
+    	                + currentdate.getHours() + ":"  
+    	                + currentdate.getMinutes() + ":" 
+    	                + currentdate.getSeconds();
+    	
+    	console.log("Datetime: "+datetime);       
+    	         
+    	function saveterm(term){
+    		$.ajax({
+        	    type: "POST",
+        	    url: "/api/json/model",
+        	    //dataType: 'jsonp',
+        	    data: { planet: term , time: datetime},
+        	    success: function(e) {
+        	        console.log('Succesfully stored data');
+        	    },
+        	    error: function(e) {
+        	        console.log('Error: '+e);
+        	    }
+        	    	
+        	});
+        	
+    	}
+    	
+    	
+    	
+    	
+    	
     	$.ajax({
     	    type: "POST",
     	    url: "http://data.nasa.gov/api/get_search_results/?search="+planetName+"&callback=?",
@@ -91,7 +122,8 @@ pageEncoding="ISO-8859-1"%>
     	        
     	        	});
     	        $("#search-results").append(result);
-    	       
+    	        saveterm(planetName);
+    	        
     	    },
     	    error: function(e) {
     	        alert('Error: '+e);
