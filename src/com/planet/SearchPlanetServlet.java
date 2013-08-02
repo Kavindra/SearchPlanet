@@ -4,6 +4,7 @@ import java.io.IOException;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.FilterChain;
@@ -112,6 +113,8 @@ public class SearchPlanetServlet extends HttpServlet {
 			for (SearchPlanet planet: planetList){
 				sortList.add(planet.id);
 			}
+			Collections.sort(sortList);
+			
 			while(sortList.size() >= 10){
 				SearchPlanet firstEntry = db.get(new Key<SearchPlanet>(SearchPlanet.class, sortList.get(0)));
 				db.delete(firstEntry);	
