@@ -11,7 +11,7 @@ pageEncoding="ISO-8859-1"%>
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <title>search Planets</title>
+    <title>Search Planets</title>
     
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/jquery-1.10.2.js"></script>
@@ -31,7 +31,10 @@ pageEncoding="ISO-8859-1"%>
     </table> -->
     
      <table>
-    	<tr>Enter search query: <input type="text" name="searchword"></tr>
+    	<tr>
+    	<label>Enter search query:</label> 
+    	<input type="text" name="searchword" id="searchword">
+    	</tr>
     	<tr><button type="button" id="searchButton">Search</button></tr>
     </table>
     </br>
@@ -60,8 +63,11 @@ pageEncoding="ISO-8859-1"%>
     <script type="text/javascript">
     $(document).on("click","#searchButton",function(event){
     	event.preventDefault();
-    	var planetName = "saturn";
-    	alert(planetName);
+    	//var planetName = "saturn";
+    	var planetName = $("#searchword").val();
+    	//alert(planetName);
+    	$("#search-results").append('<div>Searching....</div>');
+    	var result = '';
     	
     	$.ajax({
     	    type: "POST",
@@ -72,7 +78,7 @@ pageEncoding="ISO-8859-1"%>
     	        //alert("Completed..!!");
     	        //alert(data.status);
     	        var postsList = data.posts;
-    	        var result = '';
+    	        
     	        $.each(postsList, function(index,post){
     	        	
     	        	result += '<div>Id: '+post.id+'</div>';
@@ -81,10 +87,10 @@ pageEncoding="ISO-8859-1"%>
     	        	result += '<div>title: '+post.title+'</div>';
     	        	result += '<div>content: '+post.content+'</div>';
     	        	
-    	        	$("#search-results").append(result);
+    	        	
     	        
     	        	});
-    	        
+    	        $("#search-results").append(result);
     	       
     	    },
     	    error: function(e) {
