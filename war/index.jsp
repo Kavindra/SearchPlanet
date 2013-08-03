@@ -84,21 +84,16 @@ pageEncoding="ISO-8859-1"%>
         	    type: "POST",
         	    url: "/api/json/model",
         	    //dataType: 'jsonp',
-        	    data: { planet: term , time: datetime},
-        	    success: function(e) {
-        	        console.log('Succesfully stored data');
+        	    data: { planet: term , time: datetime, action: "save-data"},
+        	    success: function(){
+        	    		console.log("succesfully saved")
         	    },
-        	    error: function(e) {
-        	        console.log('Error: '+e);
-        	    }
-        	    	
+        	    /* error: function(e) {
+        	        alert('Errorrrrrrr: '+e);
+        	    } */     	    	
         	});
         	
     	}
-    	
-    	
-    	
-    	
     	
     	$.ajax({
     	    type: "POST",
@@ -122,7 +117,7 @@ pageEncoding="ISO-8859-1"%>
     	        
     	        	});
     	        $("#search-results").append(result);
-    	        saveterm(planetName);
+    	        //saveterm(planetName);
     	        
     	    },
     	    error: function(e) {
@@ -130,26 +125,7 @@ pageEncoding="ISO-8859-1"%>
     	    }  
     	});
     	
-    	
-    	
-    	
-    	
-    	// $("#searchform form").submit(function(event){
-    //	event.preventDefault();
-    	//alert("begining");
-    	//var planetName = $("searchword").val();
-    //	var planetName = "saturn";
-    	//alert(planetName);
-    	//$.post("http://data.nasa.gov/api/get_search_results/?search=" + planetName,function(status){
-    	/* $.post("http://data.nasa.gov/api/get_search_results/?search="+planetName+"&format=json&callback=",function(status){
-    	//"/api/json/center","action=new-customer&referrer="+referrer
-    		alert("here");
-    		$.mobile.hidePageLoadingMsg();
-			/* if(response.error){
-				alert(response.error);
-			} */
-    	//}); 
-    	//alert("Button clicked");
+    	saveterm(planetName);
     });
     </script>
   </body>

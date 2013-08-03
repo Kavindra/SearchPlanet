@@ -1,6 +1,8 @@
 package com.planet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 import javax.servlet.FilterChain;
@@ -25,26 +27,27 @@ public class SearchPlanetServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		
-		//String action = req.getParameter("action");
+		String action = req.getParameter("action");
 		String planetName = req.getParameter("planet");
 		String time = req.getParameter("time");
 		
 		System.out.println("Planet name: "+planetName);
 		System.out.println("Time: "+time);
+		System.out.println("Action: "+action);
 		
-		storeData(req, resp);
+		//storeData(req, resp);
 		
-		/*else if ("get-centers-for-dealer".equals(action)){
-			getCentersForDealer(req,result);
-		}*/
+		if ("save-data".equals(action)){
+			storeData(req,resp);
+		}
 
 		//Add it back to session
 		resp.setCharacterEncoding("UTF-8");
 		resp.setContentType("application/json; charset=UTF-8");
-		//resp.getWriter().print(new Gson().toJson(result));
+		resp.getWriter().print("Search Planet");
 	}
 	
-	public void doFilter(HttpServletRequest req, HttpServletResponse resp, FilterChain chain) throws ServletException, java.io.IOException {
+	/*public void doFilter(HttpServletRequest req, HttpServletResponse resp, FilterChain chain) throws ServletException, java.io.IOException {
 	    HttpServletRequest request = (HttpServletRequest) req;
 	    HttpServletResponse response = (HttpServletResponse) resp;
 
@@ -56,7 +59,7 @@ public class SearchPlanetServlet extends HttpServlet {
 	    }
 
 	    chain.doFilter(req, resp);
-	}
+	}*/
 	
 	public void storeData(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException{
@@ -69,9 +72,11 @@ public class SearchPlanetServlet extends HttpServlet {
 			planet.setSearchWord(planetName);
 			planet.setTime(time);
 			
+			//List<SearchPlanet> planetsList = new ArrayList<SearchPlanet>();
+			
 			save(planet);
 			
-			resp.setStatus(0);
+			resp.setStatus(200);
 		}catch(Exception e){
 			e.printStackTrace();
 			resp.setStatus(-1);
