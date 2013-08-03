@@ -105,17 +105,27 @@ pageEncoding="ISO-8859-1"%>
     	        //alert(data.status);
     	        var postsList = data.posts;
     	        
+    	        result += '<table width = \"70%\" align = \"center\" border = \"1\">';
     	        $.each(postsList, function(index,post){
     	        	
-    	        	result += '<div>Id: '+post.id+'</div>';
+    	        	/*result += '<div>Id: '+post.id+'</div>';
     	        	result += '<div>slug: '+post.slug+'</div>';
     	        	result += '<div>url: '+post.url+'</div>';
     	        	result += '<div>title: '+post.title+'</div>';
-    	        	result += '<div>content: '+post.content+'</div>';
+    	        	result += '<div>content: '+post.content+'</div>';*/
     	        	
+    	        	
+    	        	result += '<tr><td>Post Id</td><td>' + post.id + '</td></tr>';
+    	        	result += '<tr><td>Slug</td><td>' + post.slug + '</td></tr>';
+    	        	result += '<tr><td>Url</td><td>' + post.url + '</td></tr>';
+    	        	result += '<tr><td>Title</td><td>' + post.title + '</td></tr>';
+    	        	result += '<tr><td>Content</td><td>' + post.content + '</td></tr>';
+    	        	result += '<tr><td colspan=2></td></tr>';
     	        	
     	        
     	        	});
+    	        
+    	        result += '</table><br><br>';
     	        $("#search-results").append(result);
     	        //saveterm(planetName);
     	        

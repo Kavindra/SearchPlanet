@@ -1,8 +1,13 @@
 package com.planet;
 
+import java.util.List;
+
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
+import com.googlecode.objectify.annotation.Parent;
 import com.googlecode.objectify.util.DAOBase;
+import com.googlecode.objectify.Key;
+
 
 /**
  * Register classes to be used as Entity Classes
@@ -24,5 +29,12 @@ public class DatabaseFactory extends DAOBase {
 		return (new DatabaseFactory()).ofy();
 	}
 
+	@Parent Key<SearchPlanet> parentKey;
+	public List<SearchPlanet> getStoredEntries(){
+		
+		List<SearchPlanet> planetList = ofy().query(SearchPlanet.class).ancestor(parentKey).list();
+		
+		return planetList;
+	}
 	//	}
 }
