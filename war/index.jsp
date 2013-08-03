@@ -18,7 +18,7 @@ pageEncoding="ISO-8859-1"%>
 	<!-- <script src="js/jquery-ui.custom.min.js"></script> -->
   </head>
 
-  <body>
+  <body style="text-align: center;">
     <h1>Welcome to searchplanets.com..</h1>
 	
     <!-- <table>
@@ -40,33 +40,14 @@ pageEncoding="ISO-8859-1"%>
     </br>
     
     <p id="search-results"> </p>
-    <!-- <h2 align = "center"> Planet Search</h2>
-
-	<form method="post" action="searchterm" id="searchform">
-
-		<table border="0" cellpadding="5" cellspacing ="3" align = "center">
-
-			<tr>
-				<th align = "right">Enter Planet : </th>			
-				<td><input type="text" name="planet" /> </td>
-			</tr>
-			<tr>
-				<td colspan = "2" align = "center"><input type="submit" value="SUBMIT" /> </td>
-			</tr>
-		</table>
-	</form> -->
-	
-	<%-- <%
-	response.setHeader(200, { 'Content-Type': contentType, 'Access-Control-Allow-Origin': '*' }); 
-	%> --%>
-    
+        
     <script type="text/javascript">
     $(document).on("click","#searchButton",function(event){
     	event.preventDefault();
     	//var planetName = "saturn";
     	var planetName = $("#searchword").val();
     	//alert(planetName);
-    	$("#search-results").append('<div>Searching....</div>');
+    	//$("#search-results").append('<div>Searching....</div>');
     	var result = '';
     	
     	var currentdate = new Date(); 
@@ -115,18 +96,18 @@ pageEncoding="ISO-8859-1"%>
     	        	result += '<div>content: '+post.content+'</div>';*/
     	        	
     	        	
-    	        	result += '<tr><td>Post Id</td><td>' + post.id + '</td></tr>';
-    	        	result += '<tr><td>Slug</td><td>' + post.slug + '</td></tr>';
-    	        	result += '<tr><td>Url</td><td>' + post.url + '</td></tr>';
-    	        	result += '<tr><td>Title</td><td>' + post.title + '</td></tr>';
-    	        	result += '<tr><td>Content</td><td>' + post.content + '</td></tr>';
+    	        	result += '<tr><td><b>Post Id</b></td><td>' + post.id + '</td></tr>';
+    	        	result += '<tr><td><b>Slug</b></td><td>' + post.slug + '</td></tr>';
+    	        	result += '<tr><td><b>Url</b></td><td>' + post.url + '</td></tr>';
+    	        	result += '<tr><td><b>Title</b></td><td>' + post.title + '</td></tr>';
+    	        	result += '<tr><td><b>Content</b></td><td>' + post.content + '</td></tr>';
     	        	result += '<tr><td colspan=2></td></tr>';
     	        	
     	        
     	        	});
     	        
     	        result += '</table><br><br>';
-    	        $("#search-results").append(result);
+    	        $("#search-results").html(result);
     	        //saveterm(planetName);
     	        
     	    },

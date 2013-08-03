@@ -89,13 +89,35 @@ public class SearchPlanetServlet extends HttpServlet {
 		
 		SearchPlanet planet = new SearchPlanet();
 		
+		
+		List<SearchPlanet> planetList = db.query(SearchPlanet.class).list();
+
+		List<Integer> sortList = new ArrayList<Integer>();
+		for (SearchPlanet planet1: planetList){
+			sortList.add(planet1.termId);
+		}
+		Collections.sort(sortList);
+		//SearchPlanet lastEntry = db.get(new Key<SearchPlanet>(SearchPlanet.class, sortList.get(sortList.size()-1)));
+		int lastTermId = 0;
+		if(sortList.size() == 0){
+			lastTermId = 0;
+		}else{
+			lastTermId = sortList.get(sortList.size()-1);
+		}
+		
+		
+		System.out.println("lastTermId: "+lastTermId);
+		
 		try{
 			planet.setSearchWord(planetName);
 			planet.setTime(time);
+			planet.setTermId(lastTermId+1);
 			
 			//List<SearchPlanet> planetsList = new ArrayList<SearchPlanet>();
 			
+			deleteEntry();
 			save(planet);
+			
 			
 			resp.setStatus(200);
 
@@ -109,29 +131,32 @@ public class SearchPlanetServlet extends HttpServlet {
 		
 	}
 	
-	public void save(SearchPlanet sp){
-		
+	public void save(SearchPlanet sp){		
+		db.put(sp);
+	}
+	
+	public void deleteEntry(){
 		List<SearchPlanet> planetList = db.query(SearchPlanet.class).list();
 
+		System.out.println("List: "+planetList.toString());
+		
 		int count = planetList.size();
 		
-		if (count >= 10){
-			
-			List<Long> sortList = new ArrayList<Long>();
+		if (count >= 10){			
+			List<Integer> sortList = new ArrayList<Integer>();
 			for (SearchPlanet planet: planetList){
-				sortList.add(planet.id);
+				sortList.add(planet.termId);
 			}
 			Collections.sort(sortList);
 			
 			while(sortList.size() >= 10){
-				SearchPlanet firstEntry = db.get(new Key<SearchPlanet>(SearchPlanet.class, sortList.get(0)));
+				//SearchPlanet firstEntry = db.get(new Key<SearchPlanet>(SearchPlanet.class, sortList.get(0)));
+				SearchPlanet firstEntry = db.query(SearchPlanet.class).filter("termId", sortList.get(0)).get();
 				db.delete(firstEntry);	
 				sortList.remove(sortList.get(0));
 			}
 			
 		}
-		
-		db.put(sp);
 		
 		planetList.clear();
 		planetList = db.query(SearchPlanet.class).list();
